@@ -19,43 +19,43 @@ export default function Navbar() {
 
   const navItems = [
     { to: "/home", icon: Home, label: "Home" },
-    { to: "/zoo", icon: Sparkles, label: "Virtual Zoo" },
+    { to: "/zoo", icon: Sparkles, label: "Zoo" },
     { to: "/self-care", icon: Heart, label: "Self Care" },
-    { to: "/suggestions", icon: Lightbulb, label: "AI Tips" },
+    { to: "/suggestions", icon: Lightbulb, label: "Tips" },
   ];
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 border-b-4 border-white/30 shadow-lg"
+      className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 border-b-2 md:border-b-4 border-white/30 shadow-lg"
     >
-      <div className="container mx-auto px-4 py-3">
+      <div className="container mx-auto px-3 md:px-4 py-2 md:py-3">
         <div className="flex items-center justify-between">
-          <Link to="/home" className="flex items-center gap-2 cursor-pointer">
-            <div className="text-3xl md:text-4xl font-black text-white drop-shadow-lg">
+          <Link to="/home" className="flex items-center gap-1 md:gap-2 cursor-pointer">
+            <div className="text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-lg">
               ZODO
             </div>
             <span className="text-xl md:text-2xl">🎮</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-1 lg:gap-2">
             {navItems.map((item) => (
               <Link key={item.to} to={item.to}>
-                <Button variant="ghost" className="text-white hover:bg-white/20 gap-2">
-                  <item.icon className="h-5 w-5" />
-                  {item.label}
+                <Button variant="ghost" className="text-white hover:bg-white/20 gap-2 text-sm lg:text-base">
+                  <item.icon className="h-4 w-4 lg:h-5 lg:w-5" />
+                  <span className="hidden lg:inline">{item.label}</span>
                 </Button>
               </Link>
             ))}
             <Button
               onClick={handleLogout}
               variant="ghost"
-              className="text-white hover:bg-white/20 gap-2"
+              className="text-white hover:bg-white/20 gap-2 text-sm lg:text-base"
             >
-              <LogOut className="h-5 w-5" />
-              Log Out
+              <LogOut className="h-4 w-4 lg:h-5 lg:w-5" />
+              <span className="hidden lg:inline">Log Out</span>
             </Button>
           </div>
 
@@ -66,13 +66,13 @@ export default function Navbar() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-white hover:bg-white/20"
+                  className="text-white hover:bg-white/20 h-9 w-9"
                 >
-                  <Menu className="h-6 w-6" />
+                  <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-64 bg-gradient-to-b from-purple-100 to-pink-100">
-                <div className="flex flex-col gap-4 mt-8">
+                <div className="flex flex-col gap-3 mt-8">
                   {navItems.map((item) => (
                     <Link key={item.to} to={item.to} onClick={() => setOpen(false)}>
                       <Button variant="ghost" className="w-full justify-start gap-3 text-purple-700 hover:bg-purple-200">
