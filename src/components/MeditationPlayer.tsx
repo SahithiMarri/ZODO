@@ -6,11 +6,11 @@ import { motion } from "framer-motion";
 
 type Level = "beginner" | "intermediate" | "advanced";
 
-// Free meditation music URLs (royalty-free)
+// Soothing meditation music from uploaded assets
 const MEDITATION_AUDIO = {
-  beginner: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-  intermediate: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-  advanced: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+  beginner: "/assets/relaxing-142297.mp3",
+  intermediate: "/assets/relaxing-142297.mp3",
+  advanced: "/assets/relaxing-142297.mp3",
 };
 
 export default function MeditationPlayer() {
