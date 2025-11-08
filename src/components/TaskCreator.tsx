@@ -50,22 +50,23 @@ export default function TaskCreator({ onCreateTask }: TaskCreatorProps) {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="flex items-center gap-3">
-          {isSupported && (
+        {isSupported && (
+          <div className="flex justify-center mb-4">
             <MicButton
               isListening={isListening}
               onClick={startListening}
               disabled={isListening}
             />
-          )}
-          <Input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder={isSupported ? "Tap mic or type your task..." : "Type your task..."}
-            className="flex-1 text-lg h-14 rounded-2xl border-2 border-purple-300 focus:border-purple-500"
-            required
-          />
-        </div>
+          </div>
+        )}
+        
+        <Input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder={isSupported ? "Tap mic or type your task..." : "Type your task..."}
+          className="flex-1 text-lg h-14 rounded-2xl border-2 border-purple-300 focus:border-purple-500"
+          required
+        />
 
         <div className="flex items-center gap-3">
           <Input
