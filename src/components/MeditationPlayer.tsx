@@ -31,20 +31,26 @@ export default function MeditationPlayer() {
     if (!audioRef.current) {
       audioRef.current = new Audio(MEDITATION_AUDIO[level]);
       audioRef.current.loop = true;
+      audioRef.current.preload = "auto";
     }
     
     // Update audio source when level changes
-    audioRef.current.src = MEDITATION_AUDIO[level];
-    audioRef.current.volume = volume / 100;
+    const currentAudio = audioRef.current;
+    currentAudio.src = MEDITATION_AUDIO[level];
+    currentAudio.volume = volume / 100;
+    currentAudio.load(); // Force reload of the audio
     
     // If playing, restart with new audio
     if (isPlaying) {
-      audioRef.current.play().catch(console.error);
+      currentAudio.play().catch((error) => {
+        console.error("Audio play error:", error);
+        setIsPlaying(false);
+      });
     }
     
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
+      if (currentAudio) {
+        currentAudio.pause();
       }
     };
   }, [level]);
@@ -59,7 +65,13 @@ export default function MeditationPlayer() {
     if (isPlaying && timeLeft > 0) {
       // Start audio
       if (audioRef.current) {
-        audioRef.current.play().catch(console.error);
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.error("Audio playback failed:", error);
+            setIsPlaying(false);
+          });
+        }
       }
       
       timerRef.current = setInterval(() => {
