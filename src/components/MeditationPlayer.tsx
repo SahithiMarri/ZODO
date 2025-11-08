@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Play, Pause, Volume2 } from "lucide-react";
 import { Slider } from "./ui/slider";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { motion } from "framer-motion";
 
 type Level = "beginner" | "intermediate" | "advanced";
@@ -118,35 +119,32 @@ export default function MeditationPlayer() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-3xl p-8 border-4 border-white/50 shadow-xl"
+      className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-3xl p-6 md:p-8 border-4 border-white/50 shadow-xl"
     >
       <div className="text-center mb-6">
-        <h3 className="text-3xl font-black text-purple-700 mb-2">
+        <h3 className="text-2xl md:text-3xl font-black text-purple-700 mb-2">
           Guided Meditation 🧘
         </h3>
-        <p className="text-purple-600">{getLevelDescription()}</p>
+        <p className="text-sm md:text-base text-purple-600">{getLevelDescription()}</p>
       </div>
 
-      <div className="flex justify-center gap-3 mb-8">
-        {(["beginner", "intermediate", "advanced"] as Level[]).map((l) => (
-          <Button
-            key={l}
-            onClick={() => setLevel(l)}
-            variant={level === l ? "default" : "outline"}
-            className={`rounded-2xl font-bold capitalize cursor-pointer ${
-              level === l
-                ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
-                : "border-2 border-purple-300"
-            }`}
-          >
-            {l}
-          </Button>
-        ))}
+      <div className="mb-6">
+        <label className="block text-sm font-semibold text-purple-700 mb-2">Mode</label>
+        <Select value={level} onValueChange={(value) => setLevel(value as Level)}>
+          <SelectTrigger className="w-full rounded-2xl border-2 border-purple-300 bg-white/50">
+            <SelectValue placeholder="Select mode" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="beginner">Beginner</SelectItem>
+            <SelectItem value="intermediate">Intermediate</SelectItem>
+            <SelectItem value="advanced">Advanced</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
-      <div className="bg-white/50 rounded-3xl p-8 mb-6">
+      <div className="bg-white/50 rounded-3xl p-6 md:p-8 mb-6">
         <div className="text-center mb-6">
-          <div className="text-6xl font-black text-purple-700 mb-2">
+          <div className="text-5xl md:text-6xl font-black text-purple-700 mb-2">
             {formatTime(timeLeft)}
           </div>
           <div className="flex justify-center gap-2 mb-4">
@@ -170,12 +168,12 @@ export default function MeditationPlayer() {
           <Button
             onClick={togglePlay}
             size="lg"
-            className="rounded-full w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-xl cursor-pointer"
+            className="rounded-full w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-xl cursor-pointer"
           >
             {isPlaying ? (
-              <Pause className="h-10 w-10 text-white" />
+              <Pause className="h-8 w-8 md:h-10 md:w-10 text-white" />
             ) : (
-              <Play className="h-10 w-10 text-white ml-1" />
+              <Play className="h-8 w-8 md:h-10 md:w-10 text-white ml-1" />
             )}
           </Button>
         </div>
@@ -193,7 +191,7 @@ export default function MeditationPlayer() {
         </div>
       </div>
 
-      <p className="text-center text-sm text-purple-600">
+      <p className="text-center text-xs md:text-sm text-purple-600">
         🌟 Find a quiet spot and relax! 🎵
       </p>
     </motion.div>

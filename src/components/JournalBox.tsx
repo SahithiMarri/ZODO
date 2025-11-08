@@ -51,24 +51,24 @@ export default function JournalBox({ entries, onSave }: JournalBoxProps) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-gradient-to-br from-pink-100 to-yellow-100 rounded-3xl p-8 border-4 border-white/50 shadow-xl"
+      className="bg-gradient-to-br from-pink-100 to-yellow-100 rounded-3xl p-6 md:p-8 border-4 border-white/50 shadow-xl"
     >
       <div className="text-center mb-6">
-        <h3 className="text-3xl font-black text-purple-700 mb-2">
+        <h3 className="text-2xl md:text-3xl font-black text-purple-700 mb-2">
           My Journal 📔
         </h3>
-        <p className="text-purple-600">Write or speak your thoughts!</p>
+        <p className="text-sm md:text-base text-purple-600">Write or speak your thoughts!</p>
       </div>
 
-      <div className="bg-white/50 rounded-3xl p-6 mb-4">
+      <div className="bg-white/50 rounded-3xl p-4 md:p-6 mb-4">
         <Textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="How are you feeling today? What made you happy?"
-          className="min-h-[150px] text-lg rounded-2xl border-2 border-purple-300 focus:border-purple-500 mb-4"
+          className="min-h-[150px] text-base md:text-lg rounded-2xl border-2 border-purple-300 focus:border-purple-500 mb-4"
         />
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-3">
             {isSupported && (
               <MicButton
@@ -77,17 +77,17 @@ export default function JournalBox({ entries, onSave }: JournalBoxProps) {
                 disabled={isListening}
               />
             )}
-            <span className="text-sm text-purple-600">
+            <span className="text-xs md:text-sm text-purple-600">
               {isSupported ? "Tap mic to dictate" : "Type your thoughts"}
             </span>
           </div>
           <Button
             onClick={handleSave}
             disabled={!content.trim()}
-            className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 rounded-2xl font-bold cursor-pointer"
+            size="icon"
+            className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 rounded-full h-12 w-12 md:h-14 md:w-14 cursor-pointer shadow-lg"
           >
-            <Save className="h-5 w-5 mr-2" />
-            Save Entry
+            <Save className="h-5 w-5 md:h-6 md:w-6" />
           </Button>
         </div>
       </div>
