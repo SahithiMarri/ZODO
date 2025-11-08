@@ -71,7 +71,7 @@ export default function SurpriseBall({ animal, onClose }: SurpriseBallProps) {
                 🎁
               </motion.div>
               <h2 className="text-3xl font-black text-white mb-4">
-                Surprise Ball!
+                Surprise Box!
               </h2>
               <p className="text-xl text-white/90 mb-6">
                 Tap the gift to see what you unlocked!
