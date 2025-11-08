@@ -6,6 +6,13 @@ import { motion } from "framer-motion";
 
 type Level = "beginner" | "intermediate" | "advanced";
 
+// Free meditation music URLs (royalty-free)
+const MEDITATION_AUDIO = {
+  beginner: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+  intermediate: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+  advanced: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+};
+
 export default function MeditationPlayer() {
   const [level, setLevel] = useState<Level>("beginner");
   const [isPlaying, setIsPlaying] = useState(false);
@@ -13,23 +20,67 @@ export default function MeditationPlayer() {
   const [timeLeft, setTimeLeft] = useState(300);
   const [volume, setVolume] = useState(50);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     setTimeLeft(duration * 60);
   }, [duration]);
 
   useEffect(() => {
+    // Initialize audio element
+    if (!audioRef.current) {
+      audioRef.current = new Audio(MEDITATION_AUDIO[level]);
+      audioRef.current.loop = true;
+    }
+    
+    // Update audio source when level changes
+    audioRef.current.src = MEDITATION_AUDIO[level];
+    audioRef.current.volume = volume / 100;
+    
+    // If playing, restart with new audio
+    if (isPlaying) {
+      audioRef.current.play().catch(console.error);
+    }
+    
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, [level]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume / 100;
+    }
+  }, [volume]);
+
+  useEffect(() => {
     if (isPlaying && timeLeft > 0) {
+      // Start audio
+      if (audioRef.current) {
+        audioRef.current.play().catch(console.error);
+      }
+      
       timerRef.current = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
             setIsPlaying(false);
+            if (audioRef.current) {
+              audioRef.current.pause();
+              audioRef.current.currentTime = 0;
+            }
             return duration * 60;
           }
           return prev - 1;
         });
       }, 1000);
     } else {
+      // Pause audio
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+      
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
@@ -143,7 +194,7 @@ export default function MeditationPlayer() {
       </div>
 
       <p className="text-center text-sm text-purple-600">
-        🌟 Find a quiet spot and relax!
+        🌟 Find a quiet spot and relax! 🎵
       </p>
     </motion.div>
   );
