@@ -6,11 +6,11 @@ import { motion } from "framer-motion";
 
 type Level = "beginner" | "intermediate" | "advanced";
 
-// Soothing meditation music from uploaded assets
+// Free meditation music URLs (royalty-free)
 const MEDITATION_AUDIO = {
-  beginner: "/assets/relaxing-142297.mp3",
-  intermediate: "/assets/relaxing-142297.mp3",
-  advanced: "/assets/relaxing-142297.mp3",
+  beginner: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+  intermediate: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+  advanced: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
 };
 
 export default function MeditationPlayer() {
@@ -31,26 +31,20 @@ export default function MeditationPlayer() {
     if (!audioRef.current) {
       audioRef.current = new Audio(MEDITATION_AUDIO[level]);
       audioRef.current.loop = true;
-      audioRef.current.preload = "auto";
     }
     
     // Update audio source when level changes
-    const currentAudio = audioRef.current;
-    currentAudio.src = MEDITATION_AUDIO[level];
-    currentAudio.volume = volume / 100;
-    currentAudio.load(); // Force reload of the audio
+    audioRef.current.src = MEDITATION_AUDIO[level];
+    audioRef.current.volume = volume / 100;
     
     // If playing, restart with new audio
     if (isPlaying) {
-      currentAudio.play().catch((error) => {
-        console.error("Audio play error:", error);
-        setIsPlaying(false);
-      });
+      audioRef.current.play().catch(console.error);
     }
     
     return () => {
-      if (currentAudio) {
-        currentAudio.pause();
+      if (audioRef.current) {
+        audioRef.current.pause();
       }
     };
   }, [level]);
@@ -65,13 +59,7 @@ export default function MeditationPlayer() {
     if (isPlaying && timeLeft > 0) {
       // Start audio
       if (audioRef.current) {
-        const playPromise = audioRef.current.play();
-        if (playPromise !== undefined) {
-          playPromise.catch((error) => {
-            console.error("Audio playback failed:", error);
-            setIsPlaying(false);
-          });
-        }
+        audioRef.current.play().catch(console.error);
       }
       
       timerRef.current = setInterval(() => {
