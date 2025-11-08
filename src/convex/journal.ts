@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { mutation, query, internalQuery } from "./_generated/server";
 import { getCurrentUser } from "./users";
 
 export const list = query({
@@ -11,6 +11,17 @@ export const list = query({
     return await ctx.db
       .query("journal")
       .withIndex("by_user", (q) => q.eq("userId", user._id))
+      .order("desc")
+      .collect();
+  },
+});
+
+// Internal query for use by actions
+export const listInternal = internalQuery({
+  args: {},
+  handler: async (ctx) => {
+    return await ctx.db
+      .query("journal")
       .order("desc")
       .collect();
   },

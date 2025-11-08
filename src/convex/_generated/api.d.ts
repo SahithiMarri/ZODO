@@ -16,6 +16,7 @@ import type {
 import type * as animals from "../animals.js";
 import type * as auth_emailOtp from "../auth/emailOtp.js";
 import type * as auth from "../auth.js";
+import type * as geminiSuggestions from "../geminiSuggestions.js";
 import type * as http from "../http.js";
 import type * as journal from "../journal.js";
 import type * as progress from "../progress.js";
@@ -35,6 +36,7 @@ declare const fullApi: ApiFromModules<{
   animals: typeof animals;
   "auth/emailOtp": typeof auth_emailOtp;
   auth: typeof auth;
+  geminiSuggestions: typeof geminiSuggestions;
   http: typeof http;
   journal: typeof journal;
   progress: typeof progress;

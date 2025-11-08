@@ -1,5 +1,7 @@
-import { query } from "./_generated/server";
+import { query, action } from "./_generated/server";
 import { getCurrentUser } from "./users";
+import { internal } from "./_generated/api";
+import { v } from "convex/values";
 
 export const getPersonalized = query({
   args: {},
@@ -7,6 +9,7 @@ export const getPersonalized = query({
     const user = await getCurrentUser(ctx);
     if (!user) return [];
 
+    // Return rule-based suggestions as immediate response
     const tasks = await ctx.db
       .query("tasks")
       .withIndex("by_user", (q) => q.eq("userId", user._id))
@@ -126,5 +129,14 @@ export const getPersonalized = query({
     }
 
     return suggestions;
+  },
+});
+
+export const generateAI = action({
+  args: { userId: v.id("users") },
+  handler: async (ctx, args): Promise<Array<{ id: string; title: string; text: string; icon: string }>> => {
+    return await ctx.runAction(internal.geminiSuggestions.generatePersonalizedSuggestions, {
+      userId: args.userId,
+    });
   },
 });
