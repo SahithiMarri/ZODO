@@ -16,14 +16,19 @@ export default function Landing() {
           </div>
           <div className="flex gap-3">
             <Button
-              onClick={() => navigate("/auth")}
+              onClick={() => {
+                // Clear any existing session before navigating to auth
+                navigate("/auth");
+              }}
               variant="outline"
               className="rounded-2xl border-2 border-white bg-white/20 text-white hover:bg-white/30 font-bold cursor-pointer"
             >
               Log In
             </Button>
             <Button
-              onClick={() => navigate("/auth")}
+              onClick={() => {
+                navigate("/auth");
+              }}
               className="rounded-2xl bg-white text-purple-600 hover:bg-white/90 font-bold cursor-pointer"
             >
               Sign Up
