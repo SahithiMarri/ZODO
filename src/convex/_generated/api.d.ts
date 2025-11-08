@@ -19,6 +19,7 @@ import type * as auth from "../auth.js";
 import type * as http from "../http.js";
 import type * as journal from "../journal.js";
 import type * as progress from "../progress.js";
+import type * as suggestions from "../suggestions.js";
 import type * as tasks from "../tasks.js";
 import type * as users from "../users.js";
 
@@ -37,6 +38,7 @@ declare const fullApi: ApiFromModules<{
   http: typeof http;
   journal: typeof journal;
   progress: typeof progress;
+  suggestions: typeof suggestions;
   tasks: typeof tasks;
   users: typeof users;
 }>;

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 interface SuggestionCardProps {
   suggestion: {
-    id: number;
+    id: number | string;
     title: string;
     text: string;
     icon: string;
