@@ -94,41 +94,41 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-purple-200 via-pink-200 to-blue-200 flex flex-col">
       <Navbar />
 
-      <main className="flex-1 container mx-auto px-4 py-8 max-w-4xl">
+      <main className="flex-1 container mx-auto px-4 py-6 md:py-8 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
+          className="mb-6 md:mb-8"
         >
-          <h1 className="text-4xl md:text-5xl font-black text-purple-700 mb-4 text-center">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-purple-700 mb-4 text-center">
             Welcome Back! 🎉
           </h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="bg-gradient-to-br from-orange-200 to-red-200 rounded-3xl p-6 border-4 border-white/50 shadow-lg">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mb-4 md:mb-6">
+            <div className="bg-gradient-to-br from-orange-200 to-red-200 rounded-3xl p-4 md:p-6 border-4 border-white/50 shadow-lg">
               <div className="flex items-center gap-3">
-                <Flame className="h-8 w-8 text-orange-600" />
+                <Flame className="h-6 w-6 md:h-8 md:w-8 text-orange-600" />
                 <div>
-                  <p className="text-sm text-orange-700 font-semibold">Streak</p>
-                  <p className="text-3xl font-black text-orange-600">{streak} days</p>
+                  <p className="text-xs md:text-sm text-orange-700 font-semibold">Streak</p>
+                  <p className="text-2xl md:text-3xl font-black text-orange-600">{streak} days</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-yellow-200 to-amber-200 rounded-3xl p-6 border-4 border-white/50 shadow-lg">
+            <div className="bg-gradient-to-br from-yellow-200 to-amber-200 rounded-3xl p-4 md:p-6 border-4 border-white/50 shadow-lg">
               <div className="flex items-center gap-3">
-                <Star className="h-8 w-8 text-yellow-600" />
+                <Star className="h-6 w-6 md:h-8 md:w-8 text-yellow-600" />
                 <div className="flex-1">
-                  <p className="text-sm text-yellow-700 font-semibold">XP Progress</p>
+                  <p className="text-xs md:text-sm text-yellow-700 font-semibold">XP Progress</p>
                   <div className="flex items-center gap-2">
-                    <div className="flex-1 bg-white/50 rounded-full h-4 overflow-hidden">
+                    <div className="flex-1 bg-white/50 rounded-full h-3 md:h-4 overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${xpProgress * 100}%` }}
                         className="h-full bg-gradient-to-r from-yellow-400 to-orange-400"
                       />
                     </div>
-                    <span className="text-xl font-black text-yellow-600">{xp}</span>
+                    <span className="text-lg md:text-xl font-black text-yellow-600">{xp}</span>
                   </div>
                 </div>
               </div>
@@ -136,7 +136,7 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <div className="mb-8">
+        <div className="mb-6 md:mb-8">
           <TaskCreator onCreateTask={handleCreateTask} />
         </div>
 

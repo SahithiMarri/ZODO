@@ -18,16 +18,16 @@ export default function MicButton({ isListening, onClick, disabled }: MicButtonP
         onClick={onClick}
         disabled={disabled}
         size="lg"
-        className={`rounded-full w-16 h-16 ${
+        className={`rounded-full w-20 h-20 md:w-24 md:h-24 ${
           isListening
             ? "bg-red-500 hover:bg-red-600 animate-pulse"
             : "bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
         } shadow-xl cursor-pointer`}
       >
         {isListening ? (
-          <MicOff className="h-8 w-8 text-white" />
+          <MicOff className="h-10 w-10 md:h-12 md:w-12 text-white" />
         ) : (
-          <Mic className="h-8 w-8 text-white" />
+          <Mic className="h-10 w-10 md:h-12 md:w-12 text-white" />
         )}
       </Button>
     </motion.div>
