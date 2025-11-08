@@ -13,9 +13,13 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as animals from "../animals.js";
 import type * as auth_emailOtp from "../auth/emailOtp.js";
 import type * as auth from "../auth.js";
 import type * as http from "../http.js";
+import type * as journal from "../journal.js";
+import type * as progress from "../progress.js";
+import type * as tasks from "../tasks.js";
 import type * as users from "../users.js";
 
 /**
@@ -27,9 +31,13 @@ import type * as users from "../users.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  animals: typeof animals;
   "auth/emailOtp": typeof auth_emailOtp;
   auth: typeof auth;
   http: typeof http;
+  journal: typeof journal;
+  progress: typeof progress;
+  tasks: typeof tasks;
   users: typeof users;
 }>;
 export declare const api: FilterApi<
