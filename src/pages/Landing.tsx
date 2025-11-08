@@ -38,20 +38,9 @@ export default function Landing() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <motion.div
-            animate={{
-              scale: [1, 1.1, 1],
-              rotate: [0, 5, -5, 0],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              repeatDelay: 1,
-            }}
-            className="text-8xl mb-6"
-          >
+          <div className="text-8xl mb-6">
             🎯
-          </motion.div>
+          </div>
           <h1 className="text-5xl md:text-7xl font-black text-white mb-6 drop-shadow-lg">
             Make Tasks Fun!
           </h1>

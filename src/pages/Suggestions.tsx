@@ -25,11 +25,13 @@ export default function Suggestions() {
   }, [isLoading, isAuthenticated, navigate]);
 
   useEffect(() => {
-    if (user && !loadingAI && aiSuggestions.length === 0) {
+    let isMounted = true;
+    
+    if (user && aiSuggestions.length === 0 && !loadingAI) {
       setLoadingAI(true);
       generateAISuggestions({ userId: user._id })
         .then((suggestions) => {
-          if (suggestions && suggestions.length > 0) {
+          if (isMounted && suggestions && suggestions.length > 0) {
             setAiSuggestions(suggestions);
           }
         })
@@ -37,10 +39,16 @@ export default function Suggestions() {
           console.error("Error generating AI suggestions:", error);
         })
         .finally(() => {
-          setLoadingAI(false);
+          if (isMounted) {
+            setLoadingAI(false);
+          }
         });
     }
-  }, [user, generateAISuggestions, loadingAI, aiSuggestions.length]);
+    
+    return () => {
+      isMounted = false;
+    };
+  }, [user]);
 
   if (isLoading || !isAuthenticated) {
     return (
