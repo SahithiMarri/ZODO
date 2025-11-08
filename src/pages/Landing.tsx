@@ -16,14 +16,14 @@ export default function Landing() {
           </div>
           <div className="flex gap-3">
             <Button
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/auth")}
               variant="outline"
               className="rounded-2xl border-2 border-white bg-white/20 text-white hover:bg-white/30 font-bold cursor-pointer"
             >
               Log In
             </Button>
             <Button
-              onClick={() => navigate("/signup")}
+              onClick={() => navigate("/auth")}
               className="rounded-2xl bg-white text-purple-600 hover:bg-white/90 font-bold cursor-pointer"
             >
               Sign Up
@@ -59,7 +59,7 @@ export default function Landing() {
             Complete tasks, unlock cute animals, and build awesome habits with ZODO!
           </p>
           <Button
-            onClick={() => navigate("/signup")}
+            onClick={() => navigate("/auth")}
             size="lg"
             className="rounded-3xl bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white text-2xl font-black px-12 py-8 shadow-2xl cursor-pointer"
           >

@@ -8,8 +8,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes, useLocation, Navigate } from "react-router";
 import "./index.css";
 import Landing from "./pages/Landing.tsx";
-import Login from "./pages/Login.tsx";
-import Signup from "./pages/Signup.tsx";
+import Auth from "./pages/Auth.tsx";
 import Home from "./pages/Home.tsx";
 import Zoo from "./pages/Zoo.tsx";
 import SelfCare from "./pages/SelfCare.tsx";
@@ -51,8 +50,9 @@ createRoot(document.getElementById("root")!).render(
           <RouteSyncer />
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/auth" element={<Auth redirectAfterAuth="/home" />} />
+            <Route path="/login" element={<Navigate to="/auth" replace />} />
+            <Route path="/signup" element={<Navigate to="/auth" replace />} />
             <Route path="/home" element={<Home />} />
             <Route path="/zoo" element={<Zoo />} />
             <Route path="/self-care" element={<SelfCare />} />
