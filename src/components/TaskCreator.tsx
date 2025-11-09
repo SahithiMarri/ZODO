@@ -27,7 +27,10 @@ export default function TaskCreator({ onCreateTask }: TaskCreatorProps) {
     if (title.trim()) {
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
-      const deadline = tomorrow.toISOString().split("T")[0];
+      const year = tomorrow.getFullYear();
+      const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+      const day = String(tomorrow.getDate()).padStart(2, '0');
+      const deadline = `${year}-${month}-${day}`;
       onCreateTask(title, deadline);
       setTitle("");
     }
